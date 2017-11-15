@@ -4,11 +4,12 @@
 Wolsklep - online shopping app
 
 ## Description
-online shopping app built with MEAN stack software and MVC software architectural patter
+online shopping app built with MEAN stack software and MVC software architectural pattern
 
 ## Tools 
 - Atom
 - NodeJS
+- mssql
 - LINQ
 - Mongoose
 - Express

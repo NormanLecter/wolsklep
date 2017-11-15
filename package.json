@@ -17,6 +17,7 @@
     "@angular/core": "^5.0.0",
     "express": "^4.16.2",
     "linq": "^3.0.9",
-    "mongoose": "^4.13.0"
+    "mongoose": "^4.13.0",
+    "mssql": "^2.1.8"
   }
 }
