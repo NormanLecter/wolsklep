@@ -1,13 +1,19 @@
-var sql = require('mssql');
+const sql = require('mssql');
+const linq = require('linq');
 
-var dbConfig  = {
+let dbConfig  = {  //TODO: to JSON file and encrypt
   server : 'localhost\\WOLNIAK',
-  database : 'NORTHWND',
-  user  : 'wolniak', //TODO: hash function
+  database : 'WOLSKLEP',
+  user  : 'wolniak',
   password : 'wolniak', //TODO: hash function
   port: 1433 //TODO: hash function
 };
 
+//container to data
+let dataContainer;
+
+//connect to database and download data
+//TODO: to other file
 function  testDb(){
   var conn = new sql.Connection(dbConfig);
   var req = new sql.Request(conn);
@@ -16,16 +22,19 @@ function  testDb(){
     if(err){
       console.log(err);
     }
-    req.query("SELECT * FROM Customers", function (err, data) { //TODO: LAMBDA FUNCTION
+    req.query("SELECT * FROM Sprzet", function (err, data) { //TODO: lambda function
       if(err){
         console.log(err);
       }
       else{
-        console.log(data);
+        dataContainer = data;
+        //linq.js test query
+        linq.from(dataContainer).select().log().toJoinedString();
       }
-
     })
+    //TODO: req.query -> query sent new data to the database
   })
 };
 
+//invoke function which work with database
 testDb();
