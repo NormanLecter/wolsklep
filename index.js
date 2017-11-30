@@ -9,8 +9,18 @@ const sequelize = new Sequelize('WOLSKLEP', 'wolniak', 'wolniak', {
   }
 });
 
+// test connection to database
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
 //Models of tables in WOOLSKLEP database
-// TODO: to other file and import
+// TODO: to other file and import + ZAKTUALIZUJ  W BAZIE
 const Sprzet = sequelize.define('SPRZET',{
   IdSprzetu: {
     type: Sequelize.INTEGER,
@@ -50,49 +60,25 @@ const Sprzet = sequelize.define('SPRZET',{
 );
 
 // work with tables
-sequelize.sync().then(function(){
-  // print all rows in SPRZET
-  Sprzet.findAll().then(function(sprzet){
-    for(let i = 0; i < sprzet.length; i++){
-      console.log(sprzet[i].dataValues);
-    }
-  });
-
-  // create row
-  Sprzet.create({
-    IdSprzetu: 2,
-    Marka: 'Linksys',
-    Model: 'WRT54G',
-    Typ: 'Router',
-    PN: 0,
-    SN: 0,
-    Uwagi: '2 anteny, 4x LAN, WiFi'
-  });
-
-  // Modify row with ID = 1
-  Sprzet.findById(1).then(function(sprzet){
-    sprzet.update({
-      PN: 1
+    Sprzet.create({
+      IdSprzetu: 8,
+      Model: 'WRT54G',
+      Typ: 'Router',
+      PN: 0,
+      SN: 0,
+      Uwagi: '2 anteny, 4x LAN, WiFi'
     })
-  })
-
-  //Create row with ID = 3, print actually state of rows and drop latest made row
-  Sprzet.create({
-    IdSprzetu: 3,
-    Marka: 'DoUsuniecia',
-    Model: 'DoUsuniecia',
-    Typ: 'DoUsuniecia',
-    PN: 0,
-    SN: 0,
-    Uwagi: 'DoUsuniecia'
-  });
-
-  Sprzet.findAll().then(function(sprzet){
-    for(let  i = 0; i<sprzet.length; i++){
-          console.log(sprzet[i].dataValues);
-    }
-  });
-  Sprzet.findById(3).then(function(sprzet){
-    sprzet.destroy({});
-  })
+//TODO: number of error to enum
+.catch(Sequelize.DatabaseError, err => {
+      console.log(err);
+      if(err.parent.number == 2627){
+        console.log("\nPodane IdSprzetu juz istnieje w bazie!\n")
+      }
+      else  if(err.parent.number == 245)
+        console.log("\nPodana wartosc nie jest typu Int!\n")
+    })
+.catch(Sequelize.ValidationError, err => {
+  if(err.errors[0].type == 'notNull Violation'){
+    console.log('\nPole nie moze byc null!\n');
+  }
 });
