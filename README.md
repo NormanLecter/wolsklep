@@ -9,11 +9,12 @@ online shopping app built with MEAN stack software and MVC software architectura
 ## Tools
 - Atom
 - NodeJS
-- mssql
-- LINQ
+- Sequelize
 - Mongoose
 - Express
 - Angular
+- SQL Server
+- MongoDB
 
 ## How to run
 

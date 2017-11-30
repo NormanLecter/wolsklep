@@ -1,40 +1,98 @@
-const sql = require('mssql');
-const linq = require('linq');
+const Sequelize = require('sequelize');
 
-let dbConfig  = {  //TODO: to JSON file and encrypt
-  server : 'localhost\\WOLNIAK',
-  database : 'WOLSKLEP',
-  user  : 'wolniak',
-  password : 'wolniak', //TODO: hash function
-  port: 1433 //TODO: hash function
-};
+//TODO: pass to login to db to config.json, import + hash function?
+const sequelize = new Sequelize('WOLSKLEP', 'wolniak', 'wolniak', {
+  host: 'localhost',
+  dialect: 'mssql',
+  dialectOptions: {
+    port: 51808
+  }
+});
 
-//container to data
-let dataContainer;
+//Models of tables in WOOLSKLEP database
+// TODO: to other file and import
+const Sprzet = sequelize.define('SPRZET',{
+  IdSprzetu: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  Marka: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  Model: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  Typ: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  PN: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  SN: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  Uwagi: {
+    type: Sequelize.STRING,
+    allowNull: true
+  }
+},
+{
+  tableName: 'SPRZET',
+  freezeTableName: true
+}
+);
 
-//connect to database and download data
-//TODO: to other file
-function  testDb(){
-  var conn = new sql.Connection(dbConfig);
-  var req = new sql.Request(conn);
-
-  conn.connect(function (err) { //TODO: lambda function
-    if(err){
-      console.log(err);
+// work with tables
+sequelize.sync().then(function(){
+  // print all rows in SPRZET
+  Sprzet.findAll().then(function(sprzet){
+    for(let i = 0; i < sprzet.length; i++){
+      console.log(sprzet[i].dataValues);
     }
-    req.query("SELECT * FROM Sprzet", function (err, data) { //TODO: lambda function
-      if(err){
-        console.log(err);
-      }
-      else{
-        dataContainer = data;
-        //linq.js test query
-        linq.from(dataContainer).select().log().toJoinedString();
-      }
-    })
-    //TODO: req.query -> query sent new data to the database
-  })
-};
+  });
 
-//invoke function which work with database
-testDb();
+  // create row
+  Sprzet.create({
+    IdSprzetu: 2,
+    Marka: 'Linksys',
+    Model: 'WRT54G',
+    Typ: 'Router',
+    PN: 0,
+    SN: 0,
+    Uwagi: '2 anteny, 4x LAN, WiFi'
+  });
+
+  // Modify row with ID = 1
+  Sprzet.findById(1).then(function(sprzet){
+    sprzet.update({
+      PN: 1
+    })
+  })
+
+  //Create row with ID = 3, print actually state of rows and drop latest made row
+  Sprzet.create({
+    IdSprzetu: 3,
+    Marka: 'DoUsuniecia',
+    Model: 'DoUsuniecia',
+    Typ: 'DoUsuniecia',
+    PN: 0,
+    SN: 0,
+    Uwagi: 'DoUsuniecia'
+  });
+
+  Sprzet.findAll().then(function(sprzet){
+    for(let  i = 0; i<sprzet.length; i++){
+          console.log(sprzet[i].dataValues);
+    }
+  });
+  Sprzet.findById(3).then(function(sprzet){
+    sprzet.destroy({});
+  })
+});
