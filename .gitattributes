@@ -4,9 +4,6 @@
 # Custom for Visual Studio
 *.cs     diff=csharp
 
-# node modules to ignore - because we have package.json and 'npm install' command :)
-node_modules/
-
 # Standard to msysgit
 *.doc	 diff=astextplain
 *.DOC	 diff=astextplain
