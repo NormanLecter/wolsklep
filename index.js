@@ -11,8 +11,8 @@ const Sprzet = defineSprzet.Sprzet;
 
 //function with return promise as collected data from database (value)
 function findAllSprzet(){
-  return new Promise((resolve) => {
-    Sprzet.findAll().then(function(sprzet){
+  return new Promise(resolve => {
+    Sprzet.findAll().then((sprzet) => {
         let sprzetArr = new Array(sprzet.length);
         for(let  i = 0; i<sprzet.length; i++){
               sprzetArr[i] = sprzet[i];
