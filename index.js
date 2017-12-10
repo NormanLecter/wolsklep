@@ -1,84 +1,61 @@
 const Sequelize = require('sequelize');
+const dbConnection = require('./dbConnection.js');
+const defineSprzet = require('./defineTables.js');
 
-//TODO: pass to login to db to config.json, import + hash function?
-const sequelize = new Sequelize('WOLSKLEP', 'wolniak', 'wolniak', {
-  host: 'localhost',
-  dialect: 'mssql',
-  dialectOptions: {
-    port: 51808
-  }
-});
+//connection to the database
+const sequelize = dbConnection.sequelize;
 
-// test connection to database
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
+// Models of tables in WOOLSKLEP database
+// TODO: Rest of table + new sprzet, update data, conditions of cohesion
+const Sprzet = defineSprzet.Sprzet;
 
-//Models of tables in WOOLSKLEP database
-// TODO: to other file and import + ZAKTUALIZUJ  W BAZIE
-const Sprzet = sequelize.define('SPRZET',{
-  IdSprzetu: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  Marka: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  Model: {
-    type: Sequelize.STRING,
-    allowNull: true
-  },
-  Typ: {
-    type: Sequelize.STRING,
-    allowNull: true
-  },
-  PN: {
-    type: Sequelize.STRING,
-    allowNull: true
-  },
-  SN: {
-    type: Sequelize.STRING,
-    allowNull: true
-  },
-  Uwagi: {
-    type: Sequelize.STRING,
-    allowNull: true
-  }
-},
-{
-  tableName: 'SPRZET',
-  freezeTableName: true
-}
-);
-
-// work with tables
-    Sprzet.create({
-      IdSprzetu: 8,
-      Model: 'WRT54G',
-      Typ: 'Router',
-      PN: 0,
-      SN: 0,
-      Uwagi: '2 anteny, 4x LAN, WiFi'
+//function with return promise as collected data from database (value)
+function findAllSprzet(){
+  return new Promise((resolve) => {
+    Sprzet.findAll().then(function(sprzet){
+        let sprzetArr = new Array(sprzet.length);
+        for(let  i = 0; i<sprzet.length; i++){
+              sprzetArr[i] = sprzet[i];
+        }
+        resolve(sprzetArr);
     })
-//TODO: number of error to enum
-.catch(Sequelize.DatabaseError, err => {
+    //TODO: number of error to enum;  rest of error services
+    .catch(Sequelize.DatabaseError, err => {
       console.log(err);
       if(err.parent.number == 2627){
         console.log("\nPodane IdSprzetu juz istnieje w bazie!\n")
       }
-      else  if(err.parent.number == 245)
+      else if(err.parent.number == 245)
         console.log("\nPodana wartosc nie jest typu Int!\n")
-    })
-.catch(Sequelize.ValidationError, err => {
-  if(err.errors[0].type == 'notNull Violation'){
-    console.log('\nPole nie moze byc null!\n');
-  }
+      })
+    .catch(Sequelize.ValidationError, err => {
+      if(err.errors[0].type == 'notNull Violation'){
+        console.log('\nPole nie moze byc null!\n');
+      }
+    });
+  });
+};
+
+// authenticate in database, then (promise) call function,
+//then (promise) close connection and print data
+sequelize
+.authenticate()
+.then(async () => {
+  console.log('Connection has been established successfully.');
+  let sprzetAll = await findAllSprzet();
+  sequelize
+  .close()
+  .then(() => {
+    console.log('Connection has been close successfully.');
+    // print data
+    for(let i = 0; i < sprzetAll.length; i++){
+      console.log(sprzetAll[i].dataValues);
+    }
+  })
+  .catch(err => {
+    console.error('Unable to close connection with the database:', err);
+  });
+})
+.catch(err => {
+  console.error('Unable to connect to the database:', err);
 });
