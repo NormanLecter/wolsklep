@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const dbConnection = require('./dbConnection.js');
+const dbConnection = require('./dbConnection');
 
 //connection to the database
 const sequelize = dbConnection.sequelize;

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
-const dbConnection = require('./dbConnection.js');
-const defineSprzet = require('./defineTables.js');
+const dbConnection = require('./dbConnection');
+const defineSprzet = require('./defineTables');
 
 //connection to the database
 const sequelize = dbConnection.sequelize;
