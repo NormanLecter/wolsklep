@@ -1,0 +1,37 @@
+<div class="container">
+    <h1>Sprzęt - Lista
+        <a [routerLink]="['/dodaj']" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          Dodaj nowy...
+        </a>
+    </h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Marka</th>
+          <th>Model</th>
+          <th>Typ</th>
+          <th>PN</th>
+          <th>SN</th>
+          <th>Uwagi</th>
+          <th>Akcje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of sprzet">
+          <td>{{ s.IdSprzetu }}</td>
+          <td>{{ s.Marka }}</td>
+          <td>{{ s.Model }}</td>
+          <td>{{ s.Typ }}</td>
+          <td>{{ s.PN }}</td>
+          <td>{{ s.SN }}</td>
+          <td>{{ s.Uwagi }}</td>
+          <td>
+            <a id="do" [routerLink]="['/edycja', s.IdSprzetu]" class="btn btn-success">EDYTUJ</a>
+            <button class="btn btn-danger" type="button" (click)="deleteSprzet(s.IdSprzetu)">USUŃ</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
