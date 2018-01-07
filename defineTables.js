@@ -11,19 +11,24 @@ exports.Sprzet = sequelize.define('SPRZET',{
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
+    unique : true
   },
   Marka: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      is: /^([A-Z0-9]+).*$/
+    }
   },
   Model: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
   },
   Typ: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
   },
   PN: {
     type: Sequelize.STRING,

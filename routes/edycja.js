@@ -11,22 +11,40 @@ const sequelize = dbConnection.sequelize;
 const Sprzet = defineSprzet.Sprzet;
 
 router.get('/:id', function(req, res, next) {
+  sequelize.authenticate().then(() => {
+    console.log('=> Polaczenie z baza ustanowione poprawnie - edycja.js');
     Sprzet.findById(parseInt(req.params.id)).then((sprzet) => {
       res.json(sprzet);
+    // TODO: Close connection?
     })
-  });
+  }).catch(err => {
+    console.log('=> Nie mozna polaczyc sie z baza - edycja.js, blad  : ', err);
+  })
+ });
 
 router.put('/:id', function(req, res, next) {
-  Sprzet.findById(parseInt(req.params.id)).then((sprzet) => {
-    sprzet.update(req.body);
-    res.json(sprzet);
+  sequelize.authenticate().then(() => {
+    console.log('=> Polaczenie z baza ustanowione poprawnie - edycja.js');
+    Sprzet.findById(parseInt(req.params.id)).then((sprzet) => {
+      sprzet.update(req.body);
+      res.json(sprzet);
+      // TODO: Close connection?
+    })
+  }).catch(err => {
+    console.log('=> Nie mozna polaczyc sie z baza - edycja.js, blad  : ', err);
   })
 });
 
 router.delete('/:id', function(req, res, next) {
-  Sprzet.findById(parseInt(req.params.id)).then((sprzet) => {
-    sprzet.destroy({force: true});
-    res.json(req.body);
+  sequelize.authenticate().then(() => {
+    console.log('=> Polaczenie z baza ustanowione poprawnie - edycja.js');
+    Sprzet.findById(parseInt(req.params.id)).then((sprzet) => {
+      sprzet.destroy({force: true});
+      res.json(req.body);
+      // TODO: Close connection?
+    })
+  }).catch(err => {
+    console.log('=> Nie mozna polaczyc sie z baza - edycja.js, blad  : ', err);
   })
 });
 

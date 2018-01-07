@@ -21,6 +21,7 @@ export class SprzetAdminComponent implements OnInit {
 
   deleteSprzet(id) {
     this.http.delete('/edycja/'+id).subscribe(res => {
+          // todo : why reload doesn't work
           this.router.navigate(['/start']);
         }, (err) => {
           console.log(err);

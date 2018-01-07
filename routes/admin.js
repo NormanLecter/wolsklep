@@ -11,8 +11,15 @@ const sequelize = dbConnection.sequelize;
 const Sprzet = defineSprzet.Sprzet;
 
 router.get('/', function(req, res, next) {
-  Sprzet.findAll().then((sprzet) => {
-    res.json(sprzet);
+  sequelize.authenticate().then(() => {
+    console.log('=> Polaczenie z baza ustanowione poprawnie - admin.js');
+    Sprzet.findAll().then((sprzet) => {
+      res.json(sprzet);
+      // TODO: Close connection?
+    })
+  }).catch(err => {
+    console.log('=> Nie mozna polaczyc sie z baza - admin.js, blad : ', err);
+    //TODO: Info to user
   })
 });
 

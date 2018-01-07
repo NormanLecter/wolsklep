@@ -2,7 +2,7 @@
     <h1>Dodaj nowy sprzęt</h1>
     <div class="row">
       <div class="col-md-6">
-        <form (ngSubmit)="saveSprzet()" #bookForm="ngForm">
+        <form #bookForm="ngForm">
           <div class="form-group">
             <label for="name">ID</label>
             <input type="text" class="form-control" [(ngModel)]="sprzet.IdSprzetu" name="id">
@@ -32,7 +32,18 @@
               <input type="text" class="form-control" [(ngModel)]="sprzet.Uwagi" name="uwagi">
           </div>                
           <div class="form-group">
-            <button type="submit" class="btn btn-success">Dodaj</button>
+            <button type="submit" class="btn btn-success" (click)="saveSprzet()">Dodaj</button>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success" (click)="saveSprzetProcedura()">Dodaj - Procedura</button>
+          </div>
+          <div *ngIf="checkError" class="alert alert-danger" role="alert">
+            {{ message }}
+          </div>
+          <div *ngIf="dataAdd" class="alert alert-success" role="alert">
+            {{ message }}
+            <br>
+            <h2><a [routerLink]="['/start']" class="btn btn-info">Powrót</a></h2>
           </div>
         </form>
       </div>

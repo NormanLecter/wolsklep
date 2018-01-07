@@ -11,8 +11,45 @@ const sequelize = dbConnection.sequelize;
 const Sprzet = defineSprzet.Sprzet;
 
 router.post('/', function(req, res, next) {
-  Sprzet.create(req.body);
-  res.json(req.body);
+  sequelize.authenticate().then(() => {
+    console.log('=> Polaczenie z baza ustanowione poprawnie - dodaj.js');
+    Sprzet.create(req.body).then((msg) => {
+      res.json(req.body);
+    }).catch(err => {
+      console.log("BLAD : " + err);
+      if(err.name == 'SequelizeDatabaseError'){
+      res.json(err.parent.number);
+      }
+      else if(err.name == 'SequelizeValidationError'){
+        res.json(err.errors[0].path);
+      }
+    });
+    // TODO: Close connection?
+  }).catch(err => {
+    console.log('=> Nie mozna polaczyc sie z baza - dodaj.js, blad  : ', err);
+    //TODO: Info to user
+  })
+});
+
+// todo: other way to do with procedure
+router.post('/:id', function(req, res, next) {
+  sequelize.authenticate().then(() => {
+    console.log('=> Polaczenie z baza ustanowione poprawnie - dodaj.js');
+    sequelize.query('EXEC dodajSprzetProcedura :idSprzetu, :marka, :model, :typ, :pn, :sn, :uwagi',
+      {replacements : {idSprzetu : parseInt(req.body.IdSprzetu), marka : req.body.Marka, model : req.body.Model, typ : req.body.Typ, pn : req.body.PN, sn : req.body.SN, uwagi : req.body.Uwagi}, type: sequelize.QueryTypes.INSERT})
+      .then(msg => {
+        res.json(req.body);
+      }).catch(err => {
+        console.log("BLAD : " + err);
+        if(err.name == 'SequelizeDatabaseError'){
+          res.json(err.parent.number);
+          }
+      })
+    // TODO: Close connection?
+  }).catch(err => {
+    console.log('=> Nie mozna polaczyc sie z baza - dodaj.js, blad  : ', err);
+    //TODO: Info to user
+  })
 });
 
 module.exports = router;
