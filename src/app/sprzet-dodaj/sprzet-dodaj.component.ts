@@ -42,9 +42,13 @@ export class SprzetDodajComponent implements OnInit {
           case 547: {
             this.message = 'Nazwa Marki nie może być pusta!';
             break;
-          }
+          } 
           case 3609: {
-            this.message = 'Trigger SQL - Marka musi się zaczynać od dużej litery lub cyfry!';
+            this.message = 'Trigger SQL - Marka musi się zaczynać od litery!';
+            break;
+          }
+          case 334: {
+            this.message = 'Blad 334 -  aktywne triggery, dodaj procedura!';
             break;
           }
           default: {
@@ -56,7 +60,7 @@ export class SprzetDodajComponent implements OnInit {
       else if(typeof(res) === 'object'){
         this.checkError = false;
         this.dataAdd = true;
-        this.message = 'Rekord został dodany poprawnie - wróć do strony głównej lub dodaj kolejny rekord';
+        this.message = 'Rekord został dodany poprawnie procedurą - wróć do strony głównej lub dodaj kolejny rekord';
       }
     });
   }

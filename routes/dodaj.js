@@ -16,13 +16,17 @@ router.post('/', function(req, res, next) {
     Sprzet.create(req.body).then((msg) => {
       res.json(req.body);
     }).catch(err => {
-      console.log("BLAD : " + err);
+      res.json(err);
+     /* console.log("BLAD POST : " + err);
       if(err.name == 'SequelizeDatabaseError'){
       res.json(err.parent.number);
       }
       else if(err.name == 'SequelizeValidationError'){
         res.json(err.errors[0].path);
       }
+      else{
+        res.json(err);
+      }*/
     });
     // TODO: Close connection?
   }).catch(err => {
@@ -40,10 +44,13 @@ router.post('/:id', function(req, res, next) {
       .then(msg => {
         res.json(req.body);
       }).catch(err => {
-        console.log("BLAD : " + err);
+        console.log("BLAD POST PROCEDURE : " + err);
         if(err.name == 'SequelizeDatabaseError'){
           res.json(err.parent.number);
           }
+        else{
+          res.json(err);
+        }
       })
     // TODO: Close connection?
   }).catch(err => {

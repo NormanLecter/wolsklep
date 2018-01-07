@@ -29,4 +29,30 @@ export class SprzetAdminComponent implements OnInit {
       );
   }
 
+  deleteSprzetProcedura(id) {
+    this.http.delete('/edycja/1/'+id).subscribe(res => {
+      // todo : why reload doesn't work
+      console.log(res);
+      if(typeof(res) === 'number'){
+        switch(res){
+          // todo: check if that work..
+          case 50000: {
+            alert('Nie możesz usunąć sprzętu marki ASUS.');
+            break;
+          }
+         // todo: errors and service!
+          default: {
+            alert('Nieznany błąd bazy danych - spróbuj dodać rekord ponownie.');
+            break;
+          }
+        }
+      }
+      else if(typeof(res) === 'object'){
+        this.router.navigate(['/start']);
+      }
+        }, (err) => {
+          console.log(err);
+        }
+      );
+  }
 }

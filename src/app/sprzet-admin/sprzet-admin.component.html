@@ -30,6 +30,7 @@
           <td>
             <a id="do" [routerLink]="['/edycja', s.IdSprzetu]" class="btn btn-success">EDYTUJ</a>
             <button class="btn btn-danger" type="button" (click)="deleteSprzet(s.IdSprzetu)">USUŃ</button>
+            <button class="btn btn-info" type="button" (click)="deleteSprzetProcedura(s.IdSprzetu)">USUŃ PROCEDURA</button>
           </td>
         </tr>
       </tbody>
