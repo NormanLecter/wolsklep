@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./sprzet-admin.component.css']
 })
 export class SprzetAdminComponent implements OnInit {
-
+ 
   sprzet: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
@@ -21,7 +21,7 @@ export class SprzetAdminComponent implements OnInit {
 
   deleteSprzet(id) {
     this.http.delete('/edycja/'+id).subscribe(res => {
-          // todo : why reload doesn't work
+        alert('Usuwanie rekordu o ID ' + id + " powiodło się. Zostaniesz przeniesiony na stronę główną");
           this.router.navigate(['/start']);
         }, (err) => {
           console.log(err);
@@ -31,28 +31,27 @@ export class SprzetAdminComponent implements OnInit {
 
   deleteSprzetProcedura(id) {
     this.http.delete('/edycja/1/'+id).subscribe(res => {
-      // todo : why reload doesn't work
       console.log(res);
+      if(typeof(res) === 'object'){
+        alert('Usuwanie rekordu prcocedurą o ID ' + id + " powiodło się. Zostaniesz przeniesiony na stronę główną");
+        this.router.navigate(['/start']);
+      }
       if(typeof(res) === 'number'){
         switch(res){
-          // todo: check if that work..
           case 50000: {
-            alert('Nie możesz usunąć sprzętu marki ASUS.');
+            alert('W bazie danych nie istnieje rekord z ID : ' + id);
             break;
           }
-         // todo: errors and service!
           default: {
             alert('Nieznany błąd bazy danych - spróbuj dodać rekord ponownie.');
             break;
           }
         }
       }
-      else if(typeof(res) === 'object'){
-        this.router.navigate(['/start']);
-      }
-        }, (err) => {
-          console.log(err);
-        }
-      );
+    }, (err) => {
+      console.log(err);
+    }
+  );
   }
-}
+  
+} 

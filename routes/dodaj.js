@@ -16,8 +16,7 @@ router.post('/', function(req, res, next) {
     Sprzet.create(req.body).then((msg) => {
       res.json(req.body);
     }).catch(err => {
-      res.json(err);
-     /* console.log("BLAD POST : " + err);
+     console.log("BLAD POST : " + err);
       if(err.name == 'SequelizeDatabaseError'){
       res.json(err.parent.number);
       }
@@ -26,7 +25,7 @@ router.post('/', function(req, res, next) {
       }
       else{
         res.json(err);
-      }*/
+      }
     });
     // TODO: Close connection?
   }).catch(err => {

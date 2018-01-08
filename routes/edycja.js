@@ -85,18 +85,17 @@ router.delete('/1/:id', function(req, res, next) {
   sequelize.authenticate().then(() => {
     console.log('=> Polaczenie z baza ustanowione poprawnie - edycja.js');
     Sprzet.findById(parseInt(req.params.id)).then((sprzet) => {
-      sequelize.query('EXEC usunSprzetProcedura :idSprzetu, :marka',
-      {replacements : {idSprzetu : parseInt(req.body.IdSprzetu), marka : req.body.Marka}, type: sequelize.QueryTypes.DELETE})
+      sequelize.query('EXEC usunSprzetProc :idSprzetu',
+      {replacements : {idSprzetu : parseInt(req.params.id)}, type: sequelize.QueryTypes.DELETE})
       .then(msg => {
-        res.json(req.body);
-      }).catch(err => {     
+        res.json(req.body); 
+      }).catch(err => {
         if(err.name == 'SequelizeDatabaseError'){
           res.json(err.parent.number);
         }
         else{
         res.json(err);
         }
-      });
     }).catch(err => {
       console.log("BLAD Finding by ID, ERROR : " + err);
         res.json(err);
@@ -104,6 +103,7 @@ router.delete('/1/:id', function(req, res, next) {
   }).catch(err => {
     console.log('=> Nie mozna polaczyc sie z baza - edycja.js, blad  : ', err);
   })
+});
 });
 
 router.delete('/:id', function(req, res, next) {
@@ -113,7 +113,7 @@ router.delete('/:id', function(req, res, next) {
       sprzet.destroy({force: true});
       res.json(req.body);
       // TODO: Close connection?
-    })
+    });
   }).catch(err => {
     console.log('=> Nie mozna polaczyc sie z baza - edycja.js, blad  : ', err);
   })

@@ -47,10 +47,6 @@ export class SprzetDodajComponent implements OnInit {
             this.message = 'Trigger SQL - Marka musi się zaczynać od litery!';
             break;
           }
-          case 334: {
-            this.message = 'Blad 334 -  aktywne triggery, dodaj procedura!';
-            break;
-          }
           default: {
             this.message = 'Nieznany błąd bazy danych - spróbuj dodać rekord ponownie.'
             break;
@@ -78,6 +74,10 @@ export class SprzetDodajComponent implements OnInit {
           }
           case 2627: {
             this.message = 'Podane ID już istnieje w bazie danych!';
+            break;
+          }
+          case 334: {
+            this.message = 'Blad 334 - aktywne triggery, dodaj procedura!';
             break;
           }
           default: {
