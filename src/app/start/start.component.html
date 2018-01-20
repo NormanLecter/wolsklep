@@ -1,0 +1,17 @@
+<div style="text-align:center">
+    <h1> Witaj na stronie <b>{{ title }}!</b></h1>
+    <br>
+    <h2>Przejdź do jednej z podstron</h2> 
+    <br>
+    <ul> 
+        <li>
+            <h2><a [routerLink]="['/klient']" class="btn btn-info">Wersja dla Klientów</a></h2>
+        </li>
+        <li>
+            <h2><a [routerLink]="['/admin']" class="btn btn-info">Wersja dla Adminów</a></h2>
+        </li> 
+        <li>
+            <h2><a [routerLink]="['/gosc']" class="btn btn-info">Wersja dla Gości</a></h2>
+        </li>
+    </ul>
+</div>
