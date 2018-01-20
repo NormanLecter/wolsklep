@@ -1,0 +1,70 @@
+<div style="text-align:center">
+  <h1><b>Zaloguj się</b></h1>
+  <hr>
+  <br>
+  <h2>by edytować swój  profil</h2> 
+  <br>
+  <div class="row" style="margin-left:25%; margin-right: 25%;">
+      <div class="col-md-6">
+        <form #bookForm="ngForm">
+          <div class="form-group">
+            <label for="name">Login</label>
+            <input type="text" class="form-control" [(ngModel)]="dane.Login" name="Login">
+          </div>
+          <div class="form-group">
+            <label for="name">Hasło</label>
+            <input type="password" class="form-control" [(ngModel)]="dane.Haslo" name="Haslo">
+          </div>
+          <div class="form-group">
+              <button type="submit" class="btn btn-success" (click)="zaloguj()">Zaloguj się</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+<div class="container" *ngIf='loginOk'>
+<h1>Edytuj profil</h1>
+<div class="row">
+  <div class="col-md-6">
+    <form #bookForm="ngForm">
+      <div>
+        <div class="form-group">
+          <label for="name">Imię</label>
+          <input type="text" class="form-control" [(ngModel)]="logowanie.Imie" name="imie">
+        </div>
+        <div class="form-group">
+          <label for="name">Nazwisko</label>
+          <input type="text" class="form-control" [(ngModel)]="logowanie.Nazwisko" name="nazwisko">
+        </div>
+        <div class="form-group">
+          <label for="name">Login</label>
+          <input type="text" class="form-control" [(ngModel)]="logowanie.Login" name="miasto">
+        </div>
+        <div class="form-group">
+          <label for="name">Hasło</label>
+          <input type="password" class="form-control" [(ngModel)]="logowanie.Haslo" name="typ">
+        </div>
+        <div class="form-group">
+          <label for="name">Numer kontaktowy</label>
+          <input type="text" class="form-control" [(ngModel)]="logowanie.NumerKontaktowy" name="numer">
+        </div>   
+        <div class="form-group">
+          <label for="name">Adres Email</label>
+          <input type="text" class="form-control" [(ngModel)]="logowanie.AdresEmail" name="numer">
+        </div>    
+      </div>           
+      <div class="form-group">
+        <button type="submit" class="btn btn-success" (click)="edytujKonto()">Zapisz zmiany</button>
+      </div>
+      <div *ngIf="checkError" class="alert alert-danger" role="alert">
+        {{ message }}
+      </div>
+      <div *ngIf="dataAdd" class="alert alert-success" role="alert">
+        {{ message }}
+        <br>
+        <h2><a [routerLink]="['/start']" class="btn btn-info">Powrót</a></h2>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

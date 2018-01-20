@@ -1,0 +1,14 @@
+Wykaz wszystkich TYPÓW dla bazy WOLSKLEP, stan na 20-01-18 10:51:16
+
+Marka : Kabel | Ilosc : 41
+Marka : Karta Graficzna | Ilosc : 1
+Marka : Komputer PC | Ilosc : 1
+Marka : Laptop | Ilosc : 2
+Marka : Monitor | Ilosc : 4
+Marka : Pamieć RAM | Ilosc : 8
+Marka : Pamięć RAM | Ilosc : 11
+Marka : Procesor | Ilosc : 20
+Marka : Router | Ilosc : 2
+Marka : Słuchawki | Ilosc : 1
+Marka : Taśma | Ilosc : 3
+Marka : Zasilacz | Ilosc : 1

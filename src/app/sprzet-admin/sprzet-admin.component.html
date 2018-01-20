@@ -1,17 +1,50 @@
 <div class="container">
-    <h1>Sprzęt - Lista
-        <a [routerLink]="['/dodaj']" class="btn btn-default btn-lg">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-          Dodaj nowy...
-        </a>
-    </h1>
+    <h1>Sprzęt - Lista</h1>
+    <a [routerLink]="['/dodaj']" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      Dodaj nowy sprzęt
+    </a>
+    <a (click)="raportMarki()" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+      Raport - Marki
+    </a>
+    <a (click)="raportTypy()" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+      Raport - Typy
+    </a>    
+    <br>
+    <br>
+    <a [routerLink]="['/lista-zamowien']" class="btn btn-info btn-lg">
+      <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+      Sprawdź zamówienia
+    </a>
+    <a [routerLink]="['/lista-zakupy']" class="btn btn-info btn-lg">
+      <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+      Sprawdź wysyłki
+    </a>
+    <a [routerLink]="['/lista-gwarancje']" class="btn btn-info btn-lg">
+      <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+      Sprawdź gwarancje
+    </a>
+    <br>
+    <br>
+    <a [routerLink]="['/lista-uzytkownikow']" class="btn btn-info btn-lg">
+      <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+      Lista klientów
+    </a>
+    <a [routerLink]="['/lista-administratorow']" class="btn btn-info btn-lg">
+      <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+      Lista administratorów
+    </a>
+    <br>
+    <br>
     <table class="table">
       <thead>
-        <tr>
+        <tr>  
           <th>ID</th>
           <th>Marka</th>
           <th>Model</th>
-          <th>Typ</th>
+          <th>Typ</th> 
           <th>PN</th>
           <th>SN</th>
           <th>Uwagi</th>
@@ -31,6 +64,8 @@
             <a id="do" [routerLink]="['/edycja', s.IdSprzetu]" class="btn btn-success">EDYTUJ</a>
             <button class="btn btn-danger" type="button" (click)="deleteSprzet(s.IdSprzetu)">USUŃ</button>
             <button class="btn btn-info" type="button" (click)="deleteSprzetProcedura(s.IdSprzetu)">USUŃ PROCEDURA</button>
+            <button class="btn btn-warning" type="button" (click)="testOk(s.IdSprzetu)">TEST OK</button>
+            <button class="btn btn-warning" type="button" (click)="testOkProcedura(s.IdSprzetu)">TEST OK PROCEDURA</button>
           </td>
         </tr>
       </tbody>

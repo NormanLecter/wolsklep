@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Zamówienia</h1>
+  <table class="table">
+    <thead>
+      <tr>  
+        <th>ID zamówienia</th>
+        <th>Marka</th>
+        <th>Model</th> 
+        <th>Typ</th>
+        <th>PN</th>
+        <th>SN</th>
+        <th>Uwagi</th>
+        <th>Numer kontaktowy</th> 
+        <th>Adres e-mail</th>
+        <th>Akcje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let z of zamowienia">
+        <td>{{ z.IdZamowienia }}</td>
+        <td>{{ z.Marka }}</td>
+        <td>{{ z.Model }}</td>
+        <td>{{ z.Typ }}</td>
+        <td>{{ z.PN }}</td>
+        <td>{{ z.SN }}</td>
+        <td>{{ z.Uwagi }}</td>
+        <td>{{ z.NumerKontaktowy }}</td>
+        <td>{{ z.AdresEmail }}</td>
+        <td>
+          <a id="do" [routerLink]="" class="btn btn-success">ZREALIZOWANE</a>
+          <a id="do" [routerLink]="" class="btn btn-danger">NIEMOŻLIWE</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

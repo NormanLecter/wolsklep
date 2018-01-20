@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>Sprzedaż - Lista
+      <a [routerLink]="['/zamowienie']" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Złóż zamówienie
+      </a>
+      <a [routerLink]="['/edycja-profil']" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Edytuj swój profil
+      </a>
+  </h1>
+  <table class="table">
+    <thead>
+      <tr>  
+        <th>ID sprzedaży</th>
+        <th>Data rozpoczęcia sprzedaży</th>
+        <th>Cena</th> 
+        <th>Opis</th>
+        <th>Szczegóły</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of sprzet">
+        <td>{{ s.IdSprzedazy }}</td>
+        <td>{{ s.DataRozpoczecia | date }}</td>
+        <td>{{ s.Cena }}</td>
+        <td>{{ s.Opis }}</td>
+        <td><a [routerLink]="['/szczegoly', s.IdSprzetu]">Kliknij</a>, aby zobaczyć szczegóły</td>
+        <td>
+          <a id="do" [routerLink]="['/sposob-kupowania', s.IdSprzetu]" class="btn btn-success">KUP</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

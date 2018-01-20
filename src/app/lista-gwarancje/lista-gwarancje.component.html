@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Lista - gwarancje</h1> 
+    <br>
+    <br>
+    <table class="table">
+      <thead>
+        <tr>  
+          <th>ID</th>
+          <th>Data rozpoczecia</th>
+          <th>Data zakończenia</th>
+          <th>Uwagi</th>
+          <th>ID Sprzętu</th> 
+          <th>Akcje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let g of gwarancja">
+          <td>{{ g.IdGwarancji }}</td>
+          <td>{{ g.DataRozpoczecia }}</td>
+          <td>{{ g.DataZakonczenia }}</td>
+          <td>{{ g.Uwagi }}</td>
+          <td>{{ g.SprzetIdSprzetu }}</td>
+          <td>
+              <button class="btn btn-danger" type="button" (click)="zakonczGwarancje(g.IdGwarancji)">ZAKOŃCZ GWARANCJĘ</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

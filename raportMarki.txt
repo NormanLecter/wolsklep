@@ -1,0 +1,23 @@
+Wykaz wszystkich MAREK dla bazy WOLSKLEP, stan na 20-01-18 10:51:03
+
+Marka : AData | Ilosc : 1
+Marka : AMD | Ilosc : 10
+Marka : Apacer | Ilosc : 2
+Marka : Asus | Ilosc : 2
+Marka : BRAK | Ilosc : 45
+Marka : Corsair | Ilosc : 3
+Marka : D-Link | Ilosc : 1
+Marka : Elpida | Ilosc : 2
+Marka : HIPPO | Ilosc : 1
+Marka : HP | Ilosc : 1
+Marka : Hynix | Ilosc : 4
+Marka : Hyundai | Ilosc : 1
+Marka : Infineon | Ilosc : 2
+Marka : Intel | Ilosc : 10
+Marka : Kingston | Ilosc : 1
+Marka : Linksys | Ilosc : 1
+Marka : Nanya | Ilosc : 1
+Marka : Samsung | Ilosc : 3
+Marka : Sony | Ilosc : 2
+Marka : Technics | Ilosc : 1
+Marka : Testowy | Ilosc : 1

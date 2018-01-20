@@ -1,0 +1,24 @@
+<div style="text-align:center">
+    <h1><b>Zaloguj się</b></h1>
+    <hr>
+    <br>
+    <h2>by uzyskać dostęp do panelu administratora</h2> 
+    <br>
+    <div class="row" style="margin-left:25%; margin-right: 25%;">
+        <div class="col-md-6">
+          <form #bookForm="ngForm">
+            <div class="form-group">
+              <label for="name">Login</label>
+              <input type="text" class="form-control" [(ngModel)]="dane.Login" name="Login">
+            </div>
+            <div class="form-group">
+              <label for="name">Hasło</label>
+              <input type="password" class="form-control" [(ngModel)]="dane.Haslo" name="Haslo">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success" (click)="zaloguj()">Zaloguj się</button>
+              </div>
+          </form>
+        </div>
+      </div>
+</div>
