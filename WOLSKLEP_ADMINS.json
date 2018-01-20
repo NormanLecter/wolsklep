@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5a60b3913cef1430b8e1ad23"},"Imie":"Łukasz","Nazwisko":"Wolniak","Login":"lwolniak","Haslo":"lwolniak","NumerKontaktowy":"726822225","AdresEmail":"lwolniak@gmail.com","__v":0}
+{"_id":{"$oid":"5a60ef7854763d0a549d2081"},"Imie":"Adam","Nazwisko":"Małysz","Login":"amalysz","Haslo":"amalysz","NumerKontaktowy":"0700880007","AdresEmail":"amalysz@gmail.com","__v":0}
+{"_id":{"$oid":"5a63206d17658a0984eb2f97"},"Imie":"Adam","Nazwisko":"Kowalski","Login":"akowalski1","Haslo":"akowalski1","NumerKontaktowy":"555","AdresEmail":"kowalski@onet.pl","__v":0}
