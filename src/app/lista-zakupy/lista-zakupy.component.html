@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>Lista - wysyłki</h1> 
+  <br>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>  
+        <th>ID</th>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>Miasto</th>
+        <th>Ulica</th> 
+        <th>Nr. domu</th>
+        <th>Nr. mieszkania</th>
+        <th>Kod pocztowy</th>
+        <th>Numer kontaktowy</th>
+        <th>ID Sprzętu</th>
+        <th>Zatwierdzona dnia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let w of wysylka">
+        <td>{{ w.IdWysylki }}</td>
+        <td>{{ w.Imie }}</td>
+        <td>{{ w.Nazwisko }}</td>
+        <td>{{ w.Miasto }}</td>
+        <td>{{ w.Ulica }}</td>
+        <td>{{ w.NrDomu }}</td>
+        <td>{{ w.NrMieszkania }}</td>
+        <td>{{ w.KodPocztowy }}</td>
+        <td>{{ w.NumerKontaktowy }}</td>
+        <td>{{ w.SprzetIdSprzetu }}</td>
+        <td>{{ w.createdAt | date : 'short'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

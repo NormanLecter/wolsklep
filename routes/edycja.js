@@ -9,8 +9,24 @@ const sequelize = dbConnection.sequelize;
 
 // Models of tables in WOLSKLEP database
 const Sprzet = defineSprzet.Sprzet;
+const Sprzedaz = defineSprzet.Sprzedaz;
+const Gwarancja = defineSprzet.Gwarancja;
+const Wysylka = defineSprzet.Wysylka;
+const Zamowienia = defineSprzet.Zamowienia;
 
 router.get('/:id', function(req, res, next) {
+  sequelize.authenticate().then(() => {
+    console.log('=> Polaczenie z baza ustanowione poprawnie - edycja.js');
+    Sprzet.findById(parseInt(req.params.id)).then((sprzet) => {
+      res.json(sprzet);
+    // TODO: Close connection?
+    })
+  }).catch(err => { 
+    console.log('=> Nie mozna polaczyc sie z baza - edycja.js, blad  : ', err);
+  })
+ });
+
+ router.get('/szczegoly/:id', function(req, res, next) {
   sequelize.authenticate().then(() => {
     console.log('=> Polaczenie z baza ustanowione poprawnie - edycja.js');
     Sprzet.findById(parseInt(req.params.id)).then((sprzet) => {
@@ -117,6 +133,60 @@ router.delete('/:id', function(req, res, next) {
   }).catch(err => {
     console.log('=> Nie mozna polaczyc sie z baza - edycja.js, blad  : ', err);
   })
+});
+
+router.delete('/2/:id', function(req, res, next) {
+  sequelize.authenticate().then(() => {
+    console.log('=> Polaczenie z baza ustanowione poprawnie - edycja.js');
+    Sprzet.findById(parseInt(req.params.id)).then((sprzet) => {
+      // todo: trigger sprawdzajacy czy nie jest juz czasem w tabeli
+      Sprzedaz.create({
+        DataRozpoczecia : Date.now(),
+        // todo: not random
+        Cena : Math.floor((Math.random() * 100) + 1),
+        SprzetIdSprzetu : parseInt(sprzet.IdSprzetu),
+        Opis: "Test opis dla sprzetu o ID : " + req.params.id
+      }).then((msg) => {
+        res.json(req.body);
+      }).catch(err => {
+        console.log("BLAD - WYSTAWIANIE NA SPRZEDAZ, ERROR : " +  err);
+        if(err.name == 'SequelizeDatabaseError'){
+          res.json(err.parent.number);
+        }
+        else{
+        res.json(err);
+        }
+        });
+    });
+  }).catch(err => {
+    console.log('=> Nie mozna polaczyc sie z baza - edycja.js, blad  : ', err);
+  })
+});
+
+router.delete('/22/:id', function(req, res, next) {
+  sequelize.authenticate().then(() => {
+    console.log('=> Polaczenie z baza ustanowione poprawnie - edycja.js');
+    Sprzet.findById(parseInt(req.params.id)).then((sprzet) => {
+      sequelize.query('EXEC testOkProcedura :idSprzetu',
+      {replacements : {idSprzetu : parseInt(req.params.id)}, type: sequelize.QueryTypes.DELETE})
+      .then(msg => {
+        res.json(req.body); 
+      }).catch(err => {
+        console.log(err)
+        if(err.name == 'SequelizeDatabaseError'){
+          res.json(err.parent.number);
+        }
+        else{
+        res.json(err);
+        }
+    }).catch(err => {
+      console.log("BLAD Finding by ID, ERROR : " + err);
+        res.json(err);
+    });
+  }).catch(err => {
+    console.log('=> Nie mozna polaczyc sie z baza - edycja.js, blad  : ', err);
+  })
+});
 });
 
 module.exports = router;

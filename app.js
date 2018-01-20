@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var admin = require('./routes/admin');
 var edycja = require('./routes/edycja');
 var dodaj = require('./routes/dodaj');
+var klient = require('./routes/klient');
 
 var app = express();
 
@@ -20,6 +21,7 @@ app.use('/', express.static(path.join(__dirname, 'dist')));
 app.use('/admin', admin);
 app.use('/edycja', edycja);
 app.use('/dodaj', dodaj);
+app.use('/klient', klient);
 
 /*********************************************************************/
 //TODO: make comments
